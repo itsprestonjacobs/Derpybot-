@@ -38,7 +38,8 @@ the lessons comes from these files, so learners can always compare their work ag
 | `cogs/automod.py` | Word filter, invite blocking, anti-spam |
 | `cogs/logs.py` | Mod-log for deletes, edits, joins, leaves |
 | `cogs/economy.py` | `/balance`, `/daily`, `/pay`, `/leaderboard`, XP & levels |
-| `cogs/tickets.py` | `/ticketpanel` — dropdown → reason **modal** → private channel with a **user-info panel** → transcript + logging |
+| `cogs/shop.py` | `/shop`, `/buy` — spend coins on roles (items in `config.py`) |
+| `cogs/tickets.py` | `/ticketpanel` — dropdown → reason **modal** → private channel with a **user-info panel** → **Claim** + **Close** (transcript + logging) |
 | `cogs/botsettings.py` | `/set_welcome`, `/set_logs` |
 
 > **Customizing:** almost everything (names, colors, roles, channels, ticket categories,

@@ -184,11 +184,31 @@ deleted — so you always have a full record, even after the ticket is gone.</p>
    <code>#ticket-logs</code> shows "ticket opened."
 4. Click <strong>Close</strong> → a transcript lands in <code>#ticket-logs</code> and the channel deletes.
 5. Restart the bot and use an old panel — still works. 🎉</p>
+<h2>Step 8 — A Claim button for staff</h2>
+<p>So two staff don't help the same person, add a <strong>Claim</strong> button. Put this method <strong>above</strong>
+the <code>close</code> method inside <code>CloseTicket</code> (buttons appear in the order they're defined):</p>
+<div class="codehilite"><pre><span></span><code>    <span class="nd">@discord</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Claim&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">ButtonStyle</span><span class="o">.</span><span class="n">green</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s2">&quot;🙋&quot;</span><span class="p">,</span>
+                       <span class="n">custom_id</span><span class="o">=</span><span class="s2">&quot;ticket:claim&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">claim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Interaction</span><span class="p">,</span> <span class="n">button</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">Button</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">guild_permissions</span><span class="o">.</span><span class="n">manage_messages</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;Only staff can claim tickets.&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">interaction</span><span class="o">.</span><span class="n">channel</span>
+        <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">topic</span> <span class="ow">and</span> <span class="s2">&quot;Claimed by&quot;</span> <span class="ow">in</span> <span class="n">channel</span><span class="o">.</span><span class="n">topic</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;This ticket is already claimed.&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">topic</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2"> | Claimed by </span><span class="si">{</span><span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🙋 </span><span class="si">{</span><span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">mention</span><span class="si">}</span><span class="s2"> claimed this ticket.&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>It's staff-only (checks <code>manage_messages</code>), and it stamps the channel topic with the
+claimer so it can't be claimed twice. <strong>▶ Test it</strong> — a staff member clicks Claim and it
+announces who's handling the ticket.</p>
 <h2>How to customize</h2>
 <ul>
 <li><strong>Add/remove ticket types:</strong> edit <code>TICKET_CATEGORIES</code> in <code>config.py</code>.</li>
 <li><strong>Ask for more info:</strong> add another <code>TextInput</code> to <code>TicketModal</code> (up to 5).</li>
-<li><strong>Add a Claim button:</strong> put another button in <code>CloseTicket</code> so staff can claim a ticket.</li>
+<li><strong>Change the reason prompt:</strong> edit the <code>TicketModal</code> field's <code>label</code>/<code>placeholder</code>.</li>
 </ul>
 <h2>Recap</h2>
 <p>You built a production-style ticket system: dropdown → <strong>reason modal</strong> → private channel

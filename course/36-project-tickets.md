@@ -213,11 +213,35 @@ Add these **inside** the `Tickets` class:
 4. Click **Close** → a transcript lands in `#ticket-logs` and the channel deletes.
 5. Restart the bot and use an old panel — still works. 🎉
 
+## Step 8 — A Claim button for staff
+
+So two staff don't help the same person, add a **Claim** button. Put this method **above**
+the `close` method inside `CloseTicket` (buttons appear in the order they're defined):
+
+```python
+    @discord.ui.button(label="Claim", style=discord.ButtonStyle.green, emoji="🙋",
+                       custom_id="ticket:claim")
+    async def claim(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not interaction.user.guild_permissions.manage_messages:
+            await interaction.response.send_message("Only staff can claim tickets.", ephemeral=True)
+            return
+        channel = interaction.channel
+        if channel.topic and "Claimed by" in channel.topic:
+            await interaction.response.send_message("This ticket is already claimed.", ephemeral=True)
+            return
+        await channel.edit(topic=f"{channel.topic or ''} | Claimed by {interaction.user}")
+        await interaction.response.send_message(f"🙋 {interaction.user.mention} claimed this ticket.")
+```
+
+It's staff-only (checks `manage_messages`), and it stamps the channel topic with the
+claimer so it can't be claimed twice. **▶ Test it** — a staff member clicks Claim and it
+announces who's handling the ticket.
+
 ## How to customize
 
 - **Add/remove ticket types:** edit `TICKET_CATEGORIES` in `config.py`.
 - **Ask for more info:** add another `TextInput` to `TicketModal` (up to 5).
-- **Add a Claim button:** put another button in `CloseTicket` so staff can claim a ticket.
+- **Change the reason prompt:** edit the `TicketModal` field's `label`/`placeholder`.
 
 ## Recap
 

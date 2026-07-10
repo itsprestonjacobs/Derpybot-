@@ -153,11 +153,75 @@ someone else's.</p>
         <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">)</span>
 </code></pre></div>
 
+<h2>Step 7 — A shop (spend coins on roles)</h2>
+<p>Earning coins is only fun if you can spend them. Let's add a shop that sells roles. Keep the
+items in <code>config.py</code> so they're easy to change — <code>(name, price, role name, emoji)</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># config.py</span>
+<span class="n">SHOP_ITEMS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;VIP&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;VIP&quot;</span><span class="p">,</span> <span class="s2">&quot;⭐&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Supporter&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;Supporter&quot;</span><span class="p">,</span> <span class="s2">&quot;💖&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Custom Color&quot;</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="s2">&quot;Custom Color&quot;</span><span class="p">,</span> <span class="s2">&quot;🎨&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Make <code>cogs/shop.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">discord</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">discord</span><span class="w"> </span><span class="kn">import</span> <span class="n">app_commands</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">discord.ext</span><span class="w"> </span><span class="kn">import</span> <span class="n">commands</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">economy_db</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">SHOP_ITEMS</span><span class="p">,</span> <span class="n">BRAND_COLOR</span>
+
+<span class="n">ITEMS</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">emoji</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">emoji</span> <span class="ow">in</span> <span class="n">SHOP_ITEMS</span><span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Shop</span><span class="p">(</span><span class="n">commands</span><span class="o">.</span><span class="n">Cog</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">bot</span>
+
+    <span class="nd">@app_commands</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;See what you can buy.&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">shop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Interaction</span><span class="p">):</span>
+        <span class="n">embed</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Embed</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;🛒 Shop&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">BRAND_COLOR</span><span class="p">,</span>
+                              <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Earn coins by chatting, then buy roles with `/buy`.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">emoji</span> <span class="ow">in</span> <span class="n">SHOP_ITEMS</span><span class="p">:</span>
+            <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;💰 </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2"> coins&quot;</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">)</span>
+
+    <span class="nd">@app_commands</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Buy a role.&quot;</span><span class="p">)</span>
+    <span class="nd">@app_commands</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">app_commands</span><span class="o">.</span><span class="n">Choice</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">emoji</span> <span class="ow">in</span> <span class="n">SHOP_ITEMS</span>
+    <span class="p">])</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Interaction</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">app_commands</span><span class="o">.</span><span class="n">Choice</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="n">price</span><span class="p">,</span> <span class="n">role_name</span><span class="p">,</span> <span class="n">emoji</span> <span class="o">=</span> <span class="n">ITEMS</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">interaction</span><span class="o">.</span><span class="n">guild</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">role_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;That role doesn&#39;t exist yet.&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">roles</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;You already own that!&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)[</span><span class="s2">&quot;coins&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">price</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;Not enough coins — keep chatting!&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">coins</span><span class="o">=-</span><span class="n">price</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">add_roles</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> You bought **</span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">**! Enjoy your </span><span class="si">{</span><span class="n">role</span><span class="o">.</span><span class="n">mention</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="n">bot</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">add_cog</span><span class="p">(</span><span class="n">Shop</span><span class="p">(</span><span class="n">bot</span><span class="p">))</span>
+</code></pre></div>
+
+<p>Add <code>"cogs.shop"</code> to <code>COGS</code>, create the roles (<strong>VIP</strong>, <strong>Supporter</strong>, <strong>Custom Color</strong>)
+below the bot's role, and <strong>▶ try</strong> <code>/shop</code> then <code>/buy</code>. Notice <code>@app_commands.choices</code>
+builds the dropdown of items straight from <code>SHOP_ITEMS</code> — add an item to the config and it
+appears automatically.</p>
 <h2>Take it further</h2>
 <ul>
-<li>A <strong>/shop</strong> with roles you can buy (spend coins → <code>member.add_roles</code>).</li>
 <li>A <code>rank</code> card image, or XP roles that auto-assign at certain levels.</li>
-<li>A cooldown so you can't farm XP by spamming (you'll learn cooldowns next module).</li>
+<li>A <code>/gamble</code> command, or interest on savings.</li>
+<li>Make purchased roles temporary with the tasks/scheduling you learned.</li>
 </ul>
 <h2>Recap</h2>
 <ul>

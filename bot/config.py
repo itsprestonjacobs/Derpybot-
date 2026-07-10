@@ -58,6 +58,14 @@ COINS_PER_MESSAGE = 1
 XP_PER_MESSAGE = 5
 DAILY_REWARD = 100
 
+# ---- Shop:  (item name, price, role name to grant, emoji) -----
+# The role must exist in your server and sit BELOW the bot's role.
+SHOP_ITEMS = [
+    ("VIP", 1000, "VIP", "⭐"),
+    ("Supporter", 500, "Supporter", "💖"),
+    ("Custom Color", 750, "Custom Color", "🎨"),
+]
+
 
 # ============================================================
 #  Helpers used across the bot. You can leave these alone.

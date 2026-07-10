@@ -25,6 +25,7 @@ COGS = [
     "cogs.automod",
     "cogs.logs",
     "cogs.economy",
+    "cogs.shop",
     "cogs.tickets",
     "cogs.botsettings",
 ]

@@ -97,6 +97,19 @@ class CloseTicket(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
+    @discord.ui.button(label="Claim", style=discord.ButtonStyle.green, emoji="🙋",
+                       custom_id="ticket:claim")
+    async def claim(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not interaction.user.guild_permissions.manage_messages:
+            await interaction.response.send_message("Only staff can claim tickets.", ephemeral=True)
+            return
+        channel = interaction.channel
+        if channel.topic and "Claimed by" in channel.topic:
+            await interaction.response.send_message("This ticket is already claimed.", ephemeral=True)
+            return
+        await channel.edit(topic=f"{channel.topic or ''} | Claimed by {interaction.user}")
+        await interaction.response.send_message(f"🙋 {interaction.user.mention} claimed this ticket.")
+
     @discord.ui.button(label="Close", style=discord.ButtonStyle.red, emoji="🔒",
                        custom_id="ticket:close")
     async def close(self, interaction: discord.Interaction, button: discord.ui.Button):

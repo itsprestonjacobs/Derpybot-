@@ -211,8 +211,7 @@ for i, (lid, num, title, src, out, module) in enumerate(LESSONS):
         side.append(f'<div class="side-group">{module}</div>')
         current_module = module
     side.append(f'<a class="nav-link" href="#{lid}" data-target="{lid}">'
-                f'<span class="nav-num">{num}</span><span class="nav-title">{title}</span>'
-                f'<span class="nav-check">✓</span></a>')
+                f'<span class="nav-num">{num}</span><span class="nav-title">{title}</span></a>')
 
 SITE_STYLE = """
 <style>
@@ -241,8 +240,6 @@ a{color:var(--accent);}
 .nav-num{flex:none;width:25px;height:25px;border-radius:5px;display:grid;place-items:center;font-size:.76rem;font-weight:800;background:var(--accent-weak);color:var(--accent);font-variant-numeric:tabular-nums;}
 .nav-link.active .nav-num{background:rgba(255,255,255,.22);color:#fff;}
 .nav-title{flex:1;}
-.nav-check{opacity:0;color:var(--good);font-weight:900;font-size:.82rem;}
-.nav-link.done .nav-check{opacity:1;}.nav-link.active .nav-check{color:#fff;opacity:.85;}
 .progress{margin:16px 10px 4px;}
 .progress-bar{height:5px;border-radius:99px;background:var(--border);overflow:hidden;}
 .progress-fill{height:100%;width:0;background:var(--accent);transition:width .25s;}

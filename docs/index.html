@@ -32,8 +32,6 @@ a{color:var(--accent);}
 .nav-num{flex:none;width:25px;height:25px;border-radius:5px;display:grid;place-items:center;font-size:.76rem;font-weight:800;background:var(--accent-weak);color:var(--accent);font-variant-numeric:tabular-nums;}
 .nav-link.active .nav-num{background:rgba(255,255,255,.22);color:#fff;}
 .nav-title{flex:1;}
-.nav-check{opacity:0;color:var(--good);font-weight:900;font-size:.82rem;}
-.nav-link.done .nav-check{opacity:1;}.nav-link.active .nav-check{color:#fff;opacity:.85;}
 .progress{margin:16px 10px 4px;}
 .progress-bar{height:5px;border-radius:99px;background:var(--border);overflow:hidden;}
 .progress-fill{height:100%;width:0;background:var(--accent);transition:width .25s;}
@@ -164,63 +162,63 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </head>
 <body>
 <header class="topbar"><div class="brand"><div class="logo">&gt;_</div><div>Discord Bot Course<small>Python &middot; discord.py</small></div></div><div class="spacer"></div><button class="theme-btn" type="button" aria-label="Toggle light or dark theme">&#9790;</button></header><div class="wrap"><aside class="sidebar"><div class="side-label">Lessons</div><div class="side-group">Foundations</div>
-<a class="nav-link" href="#l1" data-target="l1"><span class="nav-num">01</span><span class="nav-title">How Discord Bots Work</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l2" data-target="l2"><span class="nav-num">02</span><span class="nav-title">Install Your Tools</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l3" data-target="l3"><span class="nav-num">03</span><span class="nav-title">Python: Variables & Types</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l4" data-target="l4"><span class="nav-num">04</span><span class="nav-title">Python: Lists & Dictionaries</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l5" data-target="l5"><span class="nav-num">05</span><span class="nav-title">Python: Making Decisions</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l6" data-target="l6"><span class="nav-num">06</span><span class="nav-title">Python: Loops</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l7" data-target="l7"><span class="nav-num">07</span><span class="nav-title">Python: Functions</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l8" data-target="l8"><span class="nav-num">08</span><span class="nav-title">Python: Classes & Objects</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l9" data-target="l9"><span class="nav-num">09</span><span class="nav-title">Python: Files & Errors</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l10" data-target="l10"><span class="nav-num">10</span><span class="nav-title">Async & Await</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l1" data-target="l1"><span class="nav-num">01</span><span class="nav-title">How Discord Bots Work</span></a>
+<a class="nav-link" href="#l2" data-target="l2"><span class="nav-num">02</span><span class="nav-title">Install Your Tools</span></a>
+<a class="nav-link" href="#l3" data-target="l3"><span class="nav-num">03</span><span class="nav-title">Python: Variables & Types</span></a>
+<a class="nav-link" href="#l4" data-target="l4"><span class="nav-num">04</span><span class="nav-title">Python: Lists & Dictionaries</span></a>
+<a class="nav-link" href="#l5" data-target="l5"><span class="nav-num">05</span><span class="nav-title">Python: Making Decisions</span></a>
+<a class="nav-link" href="#l6" data-target="l6"><span class="nav-num">06</span><span class="nav-title">Python: Loops</span></a>
+<a class="nav-link" href="#l7" data-target="l7"><span class="nav-num">07</span><span class="nav-title">Python: Functions</span></a>
+<a class="nav-link" href="#l8" data-target="l8"><span class="nav-num">08</span><span class="nav-title">Python: Classes & Objects</span></a>
+<a class="nav-link" href="#l9" data-target="l9"><span class="nav-num">09</span><span class="nav-title">Python: Files & Errors</span></a>
+<a class="nav-link" href="#l10" data-target="l10"><span class="nav-num">10</span><span class="nav-title">Async & Await</span></a>
 <div class="side-group">Your Bot Comes Alive</div>
-<a class="nav-link" href="#l11" data-target="l11"><span class="nav-num">11</span><span class="nav-title">Register Your Bot</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l12" data-target="l12"><span class="nav-num">12</span><span class="nav-title">Intents & Permissions</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l13" data-target="l13"><span class="nav-num">13</span><span class="nav-title">Invite Your Bot</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l14" data-target="l14"><span class="nav-num">14</span><span class="nav-title">First Connection</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l15" data-target="l15"><span class="nav-num">15</span><span class="nav-title">Events</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l16" data-target="l16"><span class="nav-num">16</span><span class="nav-title">Slash Commands</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l17" data-target="l17"><span class="nav-num">17</span><span class="nav-title">Command Arguments</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l18" data-target="l18"><span class="nav-num">18</span><span class="nav-title">Organizing with Cogs</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l11" data-target="l11"><span class="nav-num">11</span><span class="nav-title">Register Your Bot</span></a>
+<a class="nav-link" href="#l12" data-target="l12"><span class="nav-num">12</span><span class="nav-title">Intents & Permissions</span></a>
+<a class="nav-link" href="#l13" data-target="l13"><span class="nav-num">13</span><span class="nav-title">Invite Your Bot</span></a>
+<a class="nav-link" href="#l14" data-target="l14"><span class="nav-num">14</span><span class="nav-title">First Connection</span></a>
+<a class="nav-link" href="#l15" data-target="l15"><span class="nav-num">15</span><span class="nav-title">Events</span></a>
+<a class="nav-link" href="#l16" data-target="l16"><span class="nav-num">16</span><span class="nav-title">Slash Commands</span></a>
+<a class="nav-link" href="#l17" data-target="l17"><span class="nav-num">17</span><span class="nav-title">Command Arguments</span></a>
+<a class="nav-link" href="#l18" data-target="l18"><span class="nav-num">18</span><span class="nav-title">Organizing with Cogs</span></a>
 <div class="side-group">Messages & Embeds</div>
-<a class="nav-link" href="#l19" data-target="l19"><span class="nav-num">19</span><span class="nav-title">Sending Messages & DMs</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l20" data-target="l20"><span class="nav-num">20</span><span class="nav-title">Embeds Deep Dive</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l21" data-target="l21"><span class="nav-num">21</span><span class="nav-title">Embed Recipes & Custom Embeds</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l22" data-target="l22"><span class="nav-num">22</span><span class="nav-title">A Branding System</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l19" data-target="l19"><span class="nav-num">19</span><span class="nav-title">Sending Messages & DMs</span></a>
+<a class="nav-link" href="#l20" data-target="l20"><span class="nav-num">20</span><span class="nav-title">Embeds Deep Dive</span></a>
+<a class="nav-link" href="#l21" data-target="l21"><span class="nav-num">21</span><span class="nav-title">Embed Recipes & Custom Embeds</span></a>
+<a class="nav-link" href="#l22" data-target="l22"><span class="nav-num">22</span><span class="nav-title">A Branding System</span></a>
 <div class="side-group">Interactive UI</div>
-<a class="nav-link" href="#l23" data-target="l23"><span class="nav-num">23</span><span class="nav-title">Buttons & Views</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l24" data-target="l24"><span class="nav-num">24</span><span class="nav-title">Select Menus (Dropdowns)</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l25" data-target="l25"><span class="nav-num">25</span><span class="nav-title">Modals (Pop-up Forms)</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l26" data-target="l26"><span class="nav-num">26</span><span class="nav-title">Persistent Components</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l23" data-target="l23"><span class="nav-num">23</span><span class="nav-title">Buttons & Views</span></a>
+<a class="nav-link" href="#l24" data-target="l24"><span class="nav-num">24</span><span class="nav-title">Select Menus (Dropdowns)</span></a>
+<a class="nav-link" href="#l25" data-target="l25"><span class="nav-num">25</span><span class="nav-title">Modals (Pop-up Forms)</span></a>
+<a class="nav-link" href="#l26" data-target="l26"><span class="nav-num">26</span><span class="nav-title">Persistent Components</span></a>
 <div class="side-group">Moderation</div>
-<a class="nav-link" href="#l27" data-target="l27"><span class="nav-num">27</span><span class="nav-title">Permissions & Role Hierarchy</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l28" data-target="l28"><span class="nav-num">28</span><span class="nav-title">Kick, Ban & Unban</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l29" data-target="l29"><span class="nav-num">29</span><span class="nav-title">Timeout, Purge & Warn</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l30" data-target="l30"><span class="nav-num">30</span><span class="nav-title">More Mod Commands & Adding Your Own</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l31" data-target="l31"><span class="nav-num">31</span><span class="nav-title">Welcome & Leave Messages</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l32" data-target="l32"><span class="nav-num">32</span><span class="nav-title">Auto-roles & Reaction Roles</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l33" data-target="l33"><span class="nav-num">33</span><span class="nav-title">Auto-moderation</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l34" data-target="l34"><span class="nav-num">34</span><span class="nav-title">A Logging System</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l27" data-target="l27"><span class="nav-num">27</span><span class="nav-title">Permissions & Role Hierarchy</span></a>
+<a class="nav-link" href="#l28" data-target="l28"><span class="nav-num">28</span><span class="nav-title">Kick, Ban & Unban</span></a>
+<a class="nav-link" href="#l29" data-target="l29"><span class="nav-num">29</span><span class="nav-title">Timeout, Purge & Warn</span></a>
+<a class="nav-link" href="#l30" data-target="l30"><span class="nav-num">30</span><span class="nav-title">More Mod Commands & Adding Your Own</span></a>
+<a class="nav-link" href="#l31" data-target="l31"><span class="nav-num">31</span><span class="nav-title">Welcome & Leave Messages</span></a>
+<a class="nav-link" href="#l32" data-target="l32"><span class="nav-num">32</span><span class="nav-title">Auto-roles & Reaction Roles</span></a>
+<a class="nav-link" href="#l33" data-target="l33"><span class="nav-num">33</span><span class="nav-title">Auto-moderation</span></a>
+<a class="nav-link" href="#l34" data-target="l34"><span class="nav-num">34</span><span class="nav-title">A Logging System</span></a>
 <div class="side-group">Data & Storage</div>
-<a class="nav-link" href="#l35" data-target="l35"><span class="nav-num">35</span><span class="nav-title">Saving Data with JSON</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l36" data-target="l36"><span class="nav-num">36</span><span class="nav-title">Databases with SQLite</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l37" data-target="l37"><span class="nav-num">37</span><span class="nav-title">Per-Server Settings</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l35" data-target="l35"><span class="nav-num">35</span><span class="nav-title">Saving Data with JSON</span></a>
+<a class="nav-link" href="#l36" data-target="l36"><span class="nav-num">36</span><span class="nav-title">Databases with SQLite</span></a>
+<a class="nav-link" href="#l37" data-target="l37"><span class="nav-num">37</span><span class="nav-title">Per-Server Settings</span></a>
 <div class="side-group">Projects</div>
-<a class="nav-link" href="#l38" data-target="l38"><span class="nav-num">38</span><span class="nav-title">Project: Ticket System</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l39" data-target="l39"><span class="nav-num">39</span><span class="nav-title">Project: Economy & Leveling</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l38" data-target="l38"><span class="nav-num">38</span><span class="nav-title">Project: Ticket System</span></a>
+<a class="nav-link" href="#l39" data-target="l39"><span class="nav-num">39</span><span class="nav-title">Project: Economy & Leveling</span></a>
 <div class="side-group">Going Further</div>
-<a class="nav-link" href="#l40" data-target="l40"><span class="nav-num">40</span><span class="nav-title">Background Tasks & Scheduling</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l41" data-target="l41"><span class="nav-num">41</span><span class="nav-title">Cooldowns & Rate Limits</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l42" data-target="l42"><span class="nav-num">42</span><span class="nav-title">Error Handling & a Help Command</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l43" data-target="l43"><span class="nav-num">43</span><span class="nav-title">Calling Web APIs & Webhooks</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l40" data-target="l40"><span class="nav-num">40</span><span class="nav-title">Background Tasks & Scheduling</span></a>
+<a class="nav-link" href="#l41" data-target="l41"><span class="nav-num">41</span><span class="nav-title">Cooldowns & Rate Limits</span></a>
+<a class="nav-link" href="#l42" data-target="l42"><span class="nav-num">42</span><span class="nav-title">Error Handling & a Help Command</span></a>
+<a class="nav-link" href="#l43" data-target="l43"><span class="nav-num">43</span><span class="nav-title">Calling Web APIs & Webhooks</span></a>
 <div class="side-group">Ship It</div>
-<a class="nav-link" href="#l44" data-target="l44"><span class="nav-num">44</span><span class="nav-title">Make It Yours: One-File Setup</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l45" data-target="l45"><span class="nav-num">45</span><span class="nav-title">Git & GitHub for Your Bot</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l46" data-target="l46"><span class="nav-num">46</span><span class="nav-title">Host It 24/7</span><span class="nav-check">✓</span></a>
-<a class="nav-link" href="#l47" data-target="l47"><span class="nav-num">47</span><span class="nav-title">Wrap-up & Next Steps</span><span class="nav-check">✓</span></a>
+<a class="nav-link" href="#l44" data-target="l44"><span class="nav-num">44</span><span class="nav-title">Make It Yours: One-File Setup</span></a>
+<a class="nav-link" href="#l45" data-target="l45"><span class="nav-num">45</span><span class="nav-title">Git & GitHub for Your Bot</span></a>
+<a class="nav-link" href="#l46" data-target="l46"><span class="nav-num">46</span><span class="nav-title">Host It 24/7</span></a>
+<a class="nav-link" href="#l47" data-target="l47"><span class="nav-num">47</span><span class="nav-title">Wrap-up & Next Steps</span></a>
 <div class="side-group">Help</div>
-<a class="nav-link" href="#l48" data-target="l48"><span class="nav-num">?</span><span class="nav-title">Troubleshooting</span><span class="nav-check">✓</span></a><div class="progress"><div class="progress-bar"><div class="progress-fill"></div></div><div class="progress-txt"></div></div></aside><main class="content"><article class="ddc lesson" id="l1" data-idx="0">
+<a class="nav-link" href="#l48" data-target="l48"><span class="nav-num">?</span><span class="nav-title">Troubleshooting</span></a><div class="progress"><div class="progress-bar"><div class="progress-fill"></div></div><div class="progress-txt"></div></div></aside><main class="content"><article class="ddc lesson" id="l1" data-idx="0">
 <h1>How Discord Bots Work</h1>
 <p>Before we write a single line of code, let's understand what a bot actually <em>is</em>. Five
 minutes here saves you hours of confusion later.</p>

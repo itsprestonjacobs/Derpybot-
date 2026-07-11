@@ -17,7 +17,7 @@ Double-click `index.html` — it opens in your browser. No server needed.
 2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
 3. Pick the `main` branch and the **`/docs`** folder, then **Save**.
 4. Wait a minute and refresh — GitHub shows your live URL, like
-   `https://itsprestonjacobs.github.io/Derpybot-/`.
+   `https://itsprestonjacobs.github.io/Course/`.
 
 That link is your published course. Every time you push a change to `docs/`, the site
 updates automatically.
